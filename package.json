@@ -2,8 +2,8 @@
   "name": "puppeteer-extra-plugin-recaptcha",
   "version": "3.6.8",
   "description": "A puppeteer-extra plugin to solve reCAPTCHAs and hCaptchas automatically.",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
     "src",
@@ -14,7 +14,7 @@
   "author": "berstend",
   "license": "MIT",
   "scripts": {
-    "prepare": "npm run build || echo 'Build failed but continuing'",
+    "prepare": "npm run build:tsc || echo 'Build failed but continuing'",
     "clean": "rimraf dist/*",
     "tscheck": "tsc --pretty --noEmit",
     "prebuild": "run-s clean",
