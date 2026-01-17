@@ -2,9 +2,9 @@
   "name": "puppeteer-extra-plugin-recaptcha",
   "version": "3.6.8",
   "description": "A puppeteer-extra plugin to solve reCAPTCHAs and hCaptchas automatically.",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
-  "typings": "src/index.ts",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "typings": "dist/index.d.ts",
   "files": [
     "src",
     "dist"
