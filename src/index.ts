@@ -200,7 +200,8 @@ export class PuppeteerExtraPluginRecaptcha extends PuppeteerExtraPlugin {
 
   async getRecaptchaSolutions(
     captchas: types.CaptchaInfo[],
-    provider?: types.SolutionProvider
+    provider?: types.SolutionProvider,
+    proxy?: types.ProxyConfig
   ) {
     this.debug('getRecaptchaSolutions', { captchaNum: captchas.length })
     provider = provider || this.opts.provider
@@ -228,7 +229,7 @@ export class PuppeteerExtraPluginRecaptcha extends PuppeteerExtraPlugin {
       captchas,
       provider.token,
       provider.opts || {},
-      this.opts.proxy
+      proxy
     )
     response.error =
       response.error ||
@@ -282,7 +283,8 @@ export class PuppeteerExtraPluginRecaptcha extends PuppeteerExtraPlugin {
   }
 
   async solveRecaptchas(
-    page: Page | Frame
+    page: Page | Frame,
+    proxy?: types.ProxyConfig
   ): Promise<types.SolveRecaptchasResult> {
     this.debug('solveRecaptchas')
     const response: types.SolveRecaptchasResult = {
@@ -307,7 +309,7 @@ export class PuppeteerExtraPluginRecaptcha extends PuppeteerExtraPlugin {
         const {
           solutions,
           error: solutionsError
-        } = await this.getRecaptchaSolutions(response.captchas)
+        } = await this.getRecaptchaSolutions(response.captchas, undefined, proxy)
         response.solutions = solutions
 
         const {
@@ -332,12 +334,12 @@ export class PuppeteerExtraPluginRecaptcha extends PuppeteerExtraPlugin {
     prop.findRecaptchas = async () => this.findRecaptchas(prop)
     prop.getRecaptchaSolutions = async (
       captchas: types.CaptchaInfo[],
-      provider?: types.SolutionProvider
-    ) => this.getRecaptchaSolutions(captchas, provider)
+      provider?: types.SolutionProvider,
+      proxy?: types.ProxyConfig
+    ) => this.getRecaptchaSolutions(captchas, provider, proxy)
     prop.enterRecaptchaSolutions = async (solutions: types.CaptchaSolution[]) =>
       this.enterRecaptchaSolutions(prop, solutions)
-    // Add convenience methods that wraps all others
-    prop.solveRecaptchas = async () => this.solveRecaptchas(prop)
+    prop.solveRecaptchas = async (proxy?: types.ProxyConfig) => this.solveRecaptchas(prop, proxy)
   }
 
   async onPageCreated(page: Page) {

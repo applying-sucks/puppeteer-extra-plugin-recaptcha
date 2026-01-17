@@ -20,7 +20,8 @@ export type RecaptchaPluginPageAdditions = {
 
   getRecaptchaSolutions: (
     captchas: CaptchaInfo[],
-    provider?: SolutionProvider
+    provider?: SolutionProvider,
+    proxy?: ProxyConfig
   ) => Promise<GetSolutionsResult>
 
   enterRecaptchaSolutions: (
@@ -28,7 +29,7 @@ export type RecaptchaPluginPageAdditions = {
   ) => Promise<EnterRecaptchaSolutionsResult>
 
   /** Attempt to detect and solve reCAPTCHAs on this page automatically. 🔮 */
-  solveRecaptchas: () => Promise<SolveRecaptchasResult>
+  solveRecaptchas: (proxy?: ProxyConfig) => Promise<SolveRecaptchasResult>
 }
 
 export interface SolutionProvider<TOpts = any> {
@@ -134,7 +135,6 @@ export interface PluginOptions {
   solveInactiveChallenges: boolean
 
   provider?: SolutionProvider
-  proxy?: ProxyConfig
 }
 
 export interface ContentScriptOpts {
