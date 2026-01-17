@@ -3,6 +3,7 @@ import { PuppeteerExtraPlugin } from 'puppeteer-extra-plugin'
 import { Browser, Frame, Page } from 'puppeteer'
 
 import * as types from './types'
+import { Debugger } from 'debug'
 
 import { RecaptchaContentScript } from './content'
 import { HcaptchaContentScript } from './content-hcaptcha'
@@ -20,7 +21,7 @@ export const BuiltinSolutionProviders: types.SolutionProvider[] = [
  * @noInheritDoc
  */
 export class PuppeteerExtraPluginRecaptcha extends PuppeteerExtraPlugin {
-  private contentScriptDebug: debug.Debugger
+  private contentScriptDebug: Debugger
 
   constructor(opts: Partial<types.PluginOptions>) {
     super(opts)
