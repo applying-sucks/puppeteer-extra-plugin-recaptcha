@@ -13,6 +13,7 @@
   "author": "berstend",
   "license": "MIT",
   "scripts": {
+    "prepare": "npm run build || echo 'Build failed but continuing'",
     "clean": "rimraf dist/*",
     "tscheck": "tsc --pretty --noEmit",
     "prebuild": "run-s clean",
